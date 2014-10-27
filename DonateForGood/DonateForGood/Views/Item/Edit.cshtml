@@ -1,0 +1,155 @@
+﻿@model DonateForGood.Models.ItemPost
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit:ItemPost</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.ItemPostId)
+
+        <div class="row">
+            <div class="form-group">
+                @{
+    Html.RenderPartial("_ItemCategoryPartialPage");
+                }
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        @*@Html.DropDownListFor(model => model.ItemCategoryId_, (SelectList)ViewBag.ItemCategoryId_,new { id = "ddlCategory", tabindex = "1", @class = "required" })*@
+                        @Html.DropDownListFor(model => model.ItemCategoryId_, (SelectList)ViewBag.ItemCategoryId_, "Select Category", new { id = "ddlCategory", tabindex = "1", @class = "required", SelectListItem = Model.ItemCategoryId_ })
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ContactByEmail, new { @class = "control-label col-md-10" })
+                        @Html.CheckBoxFor(model => model.ContactByEmail.Value, new { tabindex = "8" })
+                        @Html.ValidationMessageFor(model => model.ContactByEmail)
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        @Html.DropDownListFor(model => model.LocationId_, (SelectList)ViewBag.LocationId_, "Select Location", new { id = "ddlLocation", tabindex = "2", @class = "required" })
+                        @Html.ValidationMessageFor(model => model.LocationId_, "Please Select Location")
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ContactByPhone, new { @class = "control-label col-md-10" })
+                        @Html.CheckBoxFor(model => model.ContactByPhone.Value, new { tabindex = "9" })
+                        @Html.ValidationMessageFor(model => model.ContactByPhone)
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        @Html.TextBoxFor(model => model.ItemName, new { @Value = "Item Name", tabindex = "3" })
+                        @Html.ValidationMessageFor(model => model.ItemName)
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DisplayMyPhoneNo, new { @class = "control-label col-md-10" })
+                        @Html.CheckBoxFor(model => model.DisplayMyPhoneNo.Value, new { tabindex = "10" })
+                        @Html.ValidationMessageFor(model => model.DisplayMyPhoneNo)
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        @Html.TextBoxFor(model => model.PhoneNumber, new { @Value = "Phone Number", tabindex = "4", @class = "required" })
+                        @Html.ValidationMessageFor(model => model.PhoneNumber, "Please Enter Phone Number")
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DisplayMyEmail_, new { @class = "control-label col-md-10" })
+                        @Html.CheckBoxFor(model => model.DisplayMyEmail_.Value, new { tabindex = "11" })
+                        @Html.ValidationMessageFor(model => model.DisplayMyEmail_)
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        @Html.TextBoxFor(model => model.EmailAddress_, new { @Value = "Email Address", tabindex = "5", @class = "required" })
+                        @Html.ValidationMessageFor(model => model.EmailAddress_, "Please Enter Email Address")
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ItemCollectPreferenceId, "ItemCollectPreference", new { @class = "control-label col-md-20" })
+                        @Html.RadioButtonFor(model => model.ItemCollectPreferenceId, "1", new { tabindex = "12" }) PickUp
+                        @Html.RadioButtonFor(model => model.ItemCollectPreferenceId, "2", new { tabindex = "13" }) Drop
+                        @Html.ValidationMessageFor(model => model.ItemCollectPreferenceId)
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        @Html.TextBoxFor(model => model.Quantity, new { @Value = "Quantity", tabindex = "6" })
+                        @Html.ValidationMessageFor(model => model.Quantity)
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        @Html.TextBoxFor(model => model.Description, new { @Value = "Description", tabindex = "7", maxlength = 1000, style = "width: 400px; height: 80px;" })
+                        @Html.ValidationMessageFor(model => model.Description)
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Photo1, "Item Picture", new { @class = "control-label col-md-20" })
+                        @using (Html.BeginForm("UploadImage", "ItemController", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            <div class="row">
+                                <input type="file" name="uploadImages" multiple="multiple" class="input-files" tabindex="14" />
+                                <input type="submit" name="button" value="Upload" class="btn btn-default" tabindex="15" />
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Post" class="btn btn-default" tabindex="16" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

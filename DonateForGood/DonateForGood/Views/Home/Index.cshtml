@@ -1,0 +1,66 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - DFG-Home</title>
+    <link href="~/Images/icon.jpg" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/bootstrap")
+    @Styles.Render("~/Content/CSS/SharedCSS")
+
+</head>
+<body>
+    <div class="row" id="navBar">
+
+        <div class="col-md-4">
+            <div class="panel" style="background-color:mediumpurple">
+                @{
+                    Html.RenderPartial("../Home/HomeTilePartial");
+                }
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="panel" style="background-color:red">
+                @{
+                    Html.RenderPartial("../Home/HomeTilePartial");
+                }
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="panel" style="background-color:yellowgreen">
+                @{
+                    Html.RenderPartial("../Home/HomeTilePartial");
+                }
+            </div>
+        </div>
+
+    </div>
+
+    <div id="ResultPane">
+
+    </div>
+
+    <div id="RecentActivities" >
+
+        <div class="row">
+            <div class="col-md-offset-8">
+
+                @{
+                    Html.RenderAction("RecentActivityPartial", "Home");
+                }
+
+            </div>
+        </div>
+        
+
+    </div>
+
+    <div id="SuccessStories"></div>
+
+</body>
+</html>

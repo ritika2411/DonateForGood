@@ -1,0 +1,53 @@
+﻿@Scripts.Render("~/bundles/modernizr")
+@Scripts.Render("~/bundles/JS")
+@Scripts.Render("~/Scripts/JS/HomePage.js")
+@Styles.Render("~/bundles/bootstrap")
+@Styles.Render("~/Content/CSS/SharedCSS")
+
+@{
+    Layout = "";
+}
+@model List<DonateForGood.Models.RecentActivity>
+
+
+ <div class="panel panel-default">
+        <div class="panel-heading">
+            <i class="fa fa-bell fa-fw"></i> Recent Activities
+        </div>
+
+        <!-- /.panel-heading -->
+
+     
+     @if (true == true)
+     {
+        int count = 0;
+        foreach (var recentActivity in Model)
+        {
+            count++;
+            if (count > 10)
+            { 
+                break;
+            }
+            string fullName = @recentActivity.FirstName + " " + @recentActivity.LastName;
+            string post = fullName + " posted " + @recentActivity.ItemName;
+
+            DateTime days = @recentActivity.ModifiedOn.Value;
+
+            string day = days.ToShortDateString();
+        
+
+          <div class="panel-body">
+            <div class="list-group">
+                <a href="#" class="list-group-item">
+                    <i class="fa fa-comment fa-fw">@post </i> 
+                    <span class="pull-right text-muted small">
+                        <em>@day</em>
+                    </span>
+                </a>
+                </div>
+            </div>
+        }
+     }
+     
+     </div>
+                

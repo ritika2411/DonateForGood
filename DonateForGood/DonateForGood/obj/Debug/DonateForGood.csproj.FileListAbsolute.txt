@@ -1,0 +1,42 @@
+D:\DFG\Aapkivani\DonateForGoodFinal\DonateForGood\DonateForGood\obj\Debug\DonateForGood.csprojResolveAssemblyReference.cache
+D:\DFG\Aapkivani\DonateForGoodFinal\DonateForGood\DonateForGood\bin\DonateForGood.dll.config
+D:\DFG\Aapkivani\DonateForGoodFinal\DonateForGood\DonateForGood\bin\DonateForGood.dll
+D:\DFG\Aapkivani\DonateForGoodFinal\DonateForGood\DonateForGood\bin\DonateForGood.pdb
+D:\DFG\Aapkivani\DonateForGoodFinal\DonateForGood\DonateForGood\bin\Microsoft.Web.Infrastructure.dll
+D:\DFG\Aapkivani\DonateForGoodFinal\DonateForGood\DonateForGood\bin\Newtonsoft.Json.dll
+D:\DFG\Aapkivani\DonateForGoodFinal\DonateForGood\DonateForGood\bin\Microsoft.Web.Infrastructure.xml
+D:\DFG\Aapkivani\DonateForGoodFinal\DonateForGood\DonateForGood\obj\Debug\DonateForGood.dll
+D:\DFG\Aapkivani\DonateForGoodFinal\DonateForGood\DonateForGood\obj\Debug\DonateForGood.pdb
+D:\DFG\Aapkivani\DFG Final\DonateForGoodFinal\DonateForGood\DonateForGood\bin\DonateForGood.dll.config
+D:\DFG\Aapkivani\DFG Final\DonateForGoodFinal\DonateForGood\DonateForGood\bin\DonateForGood.dll
+D:\DFG\Aapkivani\DFG Final\DonateForGoodFinal\DonateForGood\DonateForGood\bin\DonateForGood.pdb
+D:\DFG\Aapkivani\DFG Final\DonateForGoodFinal\DonateForGood\DonateForGood\bin\Microsoft.Web.Infrastructure.dll
+D:\DFG\Aapkivani\DFG Final\DonateForGoodFinal\DonateForGood\DonateForGood\obj\Debug\DonateForGood.csprojResolveAssemblyReference.cache
+D:\DFG\Aapkivani\DFG Final\DonateForGoodFinal\DonateForGood\DonateForGood\obj\Debug\DonateForGood.dll
+D:\DFG\Aapkivani\DFG Final\DonateForGoodFinal\DonateForGood\DonateForGood\obj\Debug\DonateForGood.pdb
+D:\DFG\Aapkivani\DFG Final\DonateForGoodFinal\DonateForGood\DonateForGood\bin\Antlr3.Runtime.dll
+D:\DFG\Aapkivani\DFG Final\DonateForGoodFinal\DonateForGood\DonateForGood\bin\EntityFramework.dll
+D:\DFG\Aapkivani\DFG Final\DonateForGoodFinal\DonateForGood\DonateForGood\bin\EntityFramework.SqlServer.dll
+D:\DFG\Aapkivani\DFG Final\DonateForGoodFinal\DonateForGood\DonateForGood\bin\Microsoft.AspNet.Identity.Core.dll
+D:\DFG\Aapkivani\DFG Final\DonateForGoodFinal\DonateForGood\DonateForGood\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+D:\DFG\Aapkivani\DFG Final\DonateForGoodFinal\DonateForGood\DonateForGood\bin\Microsoft.AspNet.Identity.Owin.dll
+D:\DFG\Aapkivani\DFG Final\DonateForGoodFinal\DonateForGood\DonateForGood\bin\Microsoft.Owin.dll
+D:\DFG\Aapkivani\DFG Final\DonateForGoodFinal\DonateForGood\DonateForGood\bin\Microsoft.Owin.Host.SystemWeb.dll
+D:\DFG\Aapkivani\DFG Final\DonateForGoodFinal\DonateForGood\DonateForGood\bin\Microsoft.Owin.Security.Cookies.dll
+D:\DFG\Aapkivani\DFG Final\DonateForGoodFinal\DonateForGood\DonateForGood\bin\Microsoft.Owin.Security.dll
+D:\DFG\Aapkivani\DFG Final\DonateForGoodFinal\DonateForGood\DonateForGood\bin\Microsoft.Owin.Security.Facebook.dll
+D:\DFG\Aapkivani\DFG Final\DonateForGoodFinal\DonateForGood\DonateForGood\bin\Microsoft.Owin.Security.Google.dll
+D:\DFG\Aapkivani\DFG Final\DonateForGoodFinal\DonateForGood\DonateForGood\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+D:\DFG\Aapkivani\DFG Final\DonateForGoodFinal\DonateForGood\DonateForGood\bin\Microsoft.Owin.Security.OAuth.dll
+D:\DFG\Aapkivani\DFG Final\DonateForGoodFinal\DonateForGood\DonateForGood\bin\Microsoft.Owin.Security.Twitter.dll
+D:\DFG\Aapkivani\DFG Final\DonateForGoodFinal\DonateForGood\DonateForGood\bin\Owin.dll
+D:\DFG\Aapkivani\DFG Final\DonateForGoodFinal\DonateForGood\DonateForGood\bin\System.Web.Helpers.dll
+D:\DFG\Aapkivani\DFG Final\DonateForGoodFinal\DonateForGood\DonateForGood\bin\System.Web.Mvc.dll
+D:\DFG\Aapkivani\DFG Final\DonateForGoodFinal\DonateForGood\DonateForGood\bin\System.Web.Optimization.dll
+D:\DFG\Aapkivani\DFG Final\DonateForGoodFinal\DonateForGood\DonateForGood\bin\System.Web.Razor.dll
+D:\DFG\Aapkivani\DFG Final\DonateForGoodFinal\DonateForGood\DonateForGood\bin\System.Web.WebPages.Deployment.dll
+D:\DFG\Aapkivani\DFG Final\DonateForGoodFinal\DonateForGood\DonateForGood\bin\System.Web.WebPages.dll
+D:\DFG\Aapkivani\DFG Final\DonateForGoodFinal\DonateForGood\DonateForGood\bin\System.Web.WebPages.Razor.dll
+D:\DFG\Aapkivani\DFG Final\DonateForGoodFinal\DonateForGood\DonateForGood\bin\WebGrease.dll
+D:\DFG\Aapkivani\DFG Final\DonateForGoodFinal\DonateForGood\DonateForGood\bin\Newtonsoft.Json.dll
+D:\DFG\Aapkivani\DFG Final\DonateForGoodFinal\DonateForGood\DonateForGood\bin\Newtonsoft.Json.xml

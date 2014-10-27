@@ -1,0 +1,159 @@
+﻿@model DonateForGood.Models.ItemPost
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ItemPost</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ItemCategory.ItemCategoryName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ItemCategory.ItemCategoryName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Location.LocationName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Location.LocationName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ItemName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ItemName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmailAddress_)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmailAddress_)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Photo1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Photo1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Photo2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Photo2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Photo3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Photo3)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedOn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedOn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModifiedOn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModifiedOn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContactByEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContactByEmail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContactByPhone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContactByPhone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DisplayMyPhoneNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DisplayMyPhoneNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DisplayMyEmail_)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DisplayMyEmail_)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ItemCollectPreference.ItemCollectPreferenceName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ItemCollectPreference.ItemCollectPreferenceName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ItemStatu.ItemStatusName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ItemStatu.ItemStatusName)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ItemPostId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

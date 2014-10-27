@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Donate For Good</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/bundles/bootstrap")
+    @Styles.Render("~/Content/CSS/SharedCSS")
+
+</head>
+<body>
+    <header>
+        <div id="wrapperHeader">
+            <div id="header">
+                <img src="~/Images/header.png" />
+            </div>
+        </div>
+    </header>
+
+    <section>
+        @RenderBody()
+    </section>
+
+
+    <footer>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p>&copy; @DateTime.Now.Year - Donate For Good</p>
+            </div>
+        </div>
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
