@@ -1,0 +1,151 @@
+﻿@model IEnumerable<DonateForGood.Models.NGORegistration>
+
+@{
+    ViewBag.Title = "NGO Detail";
+}
+
+<br />
+<div id="wrapper" class="row">
+    <div id="page-wrapper" class="col-md-12">
+
+        <div class="row">
+            <div class="col-md-9">
+                <h3>NGO Detail</h3>
+            </div>
+            <div class="col-md-3">
+                <p>
+                    @Html.ActionLink("Back to List of NGOs", "Index")
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <content>NGO Name</content>
+                            </div>
+                            <div class="col-md-5">
+                                @Html.DisplayFor(model => model.First().FirstName)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <content>Description</content>
+                            </div>
+                            <div class="col-md-5">
+                                @Html.DisplayFor(model => model.First().Description)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <content>Website </content>
+                            </div>
+                            <div class="col-md-5">
+                                @{
+                                    var link = Model.First().WebSiteURL;
+                                    if (link!=null && !link.StartsWith("http://"))
+                                    {
+                                        link = "http://" + link;
+                                    }
+                                }
+
+                                <a href="@link">@Model.First().WebSiteURL</a>
+
+                                @*@Html.DisplayFor(model => model.First().WebSiteURL)*@
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <content>Email Address </content>
+                            </div>
+                            <div class="col-md-5">
+                                @Html.DisplayFor(model => model.First().EmailAddress)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <content>Contact Number </content>
+                            </div>
+                            <div class="col-md-5">
+                                @Html.DisplayFor(model => model.First().PhoneNumber)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <content>Secondary Contact </content>
+                            </div>
+                            <div class="col-md-5">
+                                @Html.DisplayFor(model => model.First().ContactNumber1)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <content>Contact Person </content>
+                            </div>
+                            <div class="col-md-5">
+                                @Html.DisplayFor(model => model.First().ContactPersonName)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <content>Address </content>
+                            </div>
+                            <div class="col-md-5">
+                                @Html.DisplayFor(model => Model.First().Address1)
+                                <br />
+                                @Html.DisplayFor(model => Model.First().Address2)
+                                <br />
+                                @Html.DisplayFor(model => Model.First().CityName)
+                                <br />
+                                @Html.DisplayFor(model => Model.First().StateName) -
+
+                                @Html.DisplayFor(model => Model.First().Zipcode)
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-4">
+
+                <div class="panel panel-default">
+
+                    <div class="panel-body">
+                        <img src="~/Images/Stationary.jpg" alt="Stationary">
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+
+
+

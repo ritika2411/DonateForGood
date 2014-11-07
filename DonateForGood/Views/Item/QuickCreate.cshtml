@@ -1,0 +1,154 @@
+﻿    @{
+        ViewBag.Title = "Quick Post";
+        Layout = "~/Views/Shared/_LayoutBlank.cshtml";
+    }
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/ItemCreate")
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/bundles/bootstrap")
+    @Styles.Render("~/Content/CSS/SharedCSS")
+
+    @model DonateForGood.Models.ItemPost
+
+    @using (Ajax.BeginForm(new AjaxOptions { }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="row">
+            
+                @Html.ValidationSummary(true)
+                <h3>&nbsp;&nbsp; Post Item to Donate</h3>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.DropDownListFor(model => model.ItemCategoryId_, (SelectList)ViewBag.ItemCategoryId_, "Select Category", new { @class = "form-control required", id = "ddlCategory", tabindex = "1"})
+                                @Html.ValidationMessageFor(model => model.ItemCategoryId_, "Please Select Category")
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.Label("Contact By Phone", new { @class = "help-block col-md-10" })
+                                @Html.CheckBoxFor(model => model.ContactByPhone, new { tabindex = "9" })
+                                @Html.ValidationMessageFor(model => model.ContactByPhone)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.DropDownListFor(model => model.LocationId_, (SelectList)ViewBag.LocationId_, "Select Location", new { @class = "form-control required", id = "ddlLocation", tabindex = "2"})
+                                @Html.ValidationMessageFor(model => model.LocationId_, "Please Select Location")
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.Label("Contact By Email", new { @class = "help-block col-md-10" })
+                                @Html.CheckBoxFor(model => model.ContactByEmail, new { @checked = "checked",@disabled = "disabled", tabindex = "8" })
+                                @Html.ValidationMessageFor(model => model.ContactByEmail)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.TextBoxFor(model => model.ItemName, new { placeholder = "Item Name", @class = "form-control", tabindex = "3"})
+                                @Html.ValidationMessageFor(model => model.ItemName)
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.Label("Display My PhoneNo", new { @class = "help-block col-md-10" })
+                                @Html.CheckBoxFor(model => model.DisplayMyPhoneNo, new { id = "chkDisplayMyPhoneNo", tabindex = "10" })
+                                @Html.ValidationMessageFor(model => model.DisplayMyPhoneNo)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @if (ViewBag.PhoneNumber != null)
+                                {
+                                    @Html.TextBoxFor(model => model.PhoneNumber, new { placeholder = "Phone Number", @class = "form-control required", @Value = ViewBag.PhoneNumber, tabindex = "4" })
+                                }
+                                else
+                                {
+                                    @Html.TextBoxFor(model => model.PhoneNumber, new { placeholder = "Phone Number", @class = "form-control required", tabindex = "4"})
+                                }
+                                @Html.ValidationMessageFor(model => model.PhoneNumber, "Please Enter Phone Number")
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.Label("Display My Email", new { @class = "help-block col-md-10" })
+                                @Html.CheckBoxFor(model => model.DisplayMyEmail_, new { id = "chkDisplayMyEmail", tabindex = "11" })
+                                @Html.ValidationMessageFor(model => model.DisplayMyEmail_)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @if (ViewBag.EmailAddress != null)
+                                {
+                                    @Html.TextBoxFor(model => model.EmailAddress_, new { placeholder = "Email Address", @class = "form-control required", @Value = ViewBag.EmailAddress, tabindex = "5" })
+                                }
+                                else
+                                {
+                                    @Html.TextBoxFor(model => model.EmailAddress_, new { placeholder = "Email Address", @class = "form-control required", tabindex = "5" })
+                                }
+                                @Html.ValidationMessageFor(model => model.EmailAddress_, "Please Enter Valid Email Address")
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                &nbsp;&nbsp;
+                                @Html.RadioButtonFor(model => model.ItemCollectPreferenceId, "1", new {id = "rdbPickUp", color = "#737373", tabindex = "12" }) PickUp
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                @Html.RadioButtonFor(model => model.ItemCollectPreferenceId, "2", new {id = "rdbDrop", color = "#737373", tabindex = "13" }) Drop
+                                @Html.ValidationMessageFor(model => model.ItemCollectPreferenceId)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.TextBoxFor(model => model.Quantity, new { placeholder = "Quantity", @class = "form-control required", tabindex = "6" })
+                                @Html.ValidationMessageFor(model => model.Quantity, "Please Enter Valid Quantity")
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.TextBoxFor(model => model.Description, new { placeholder = "Description", @class = "form-control", tabindex = "7", maxlength = 1000, style = "width: 400px; height: 80px;" })
+                                @Html.ValidationMessageFor(model => model.Description)
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <input type="submit" value="Quick Post" class="btn btn-md btn-success btn-block" onclick="return Validate(this);" tabindex="16" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        
+                    </div>
+                </div>
+            </div>
+      
+    }
+
+
+
+

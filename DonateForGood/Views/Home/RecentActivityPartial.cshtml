@@ -1,0 +1,68 @@
+﻿@Scripts.Render("~/bundles/modernizr")
+@Scripts.Render("~/bundles/JS")
+@Scripts.Render("~/Scripts/JS/HomePage.js")
+@Styles.Render("~/bundles/bootstrap")
+@Styles.Render("~/Content/CSS/SharedCSS")
+
+@{
+    Layout = "";
+}
+@model List<DonateForGood.Models.RecentActivity>
+
+
+ <div class="panel panel-default">
+        <div class="panel-heading">
+            <i class="fa fa-bell fa-fw"></i> <b>Recent Activities</b>
+        </div>
+
+        <!-- /.panel-heading -->
+
+     
+     @if (true == true)
+     {
+        int count = 0;
+        foreach (var recentActivity in Model)
+        {
+            count++;
+            if (count > 10)
+            { 
+                break;
+            }
+            //string[] email = @recentActivity.EmailAddress.Split('@');
+            //string userName = email[0];
+            string firstName = null;
+            if(@recentActivity.FirstName==null)
+            {
+                
+                string[] email = @recentActivity.EmailAddress.Split('@');
+                string userName = email[0];
+                firstName = userName;
+            }
+            else
+            {
+                firstName = @recentActivity.FirstName;
+            }
+            string fullName = firstName + " " + @recentActivity.LastName;
+            string post = fullName + " posted " + @recentActivity.ItemName;
+            
+
+            DateTime days = @recentActivity.ModifiedOn.Value;
+
+            string day = String.Format("{0:dd-MM-yyyy}", days);//days.ToShortDateString();
+        
+
+          
+            <div class="list-group" style="padding:4px 4px 4px 4px">
+                
+                    <i class="fa fa-comment fa-fw">@post </i> 
+                    <span class="pull-right text-muted small">
+                        <em>@day</em>
+                    </span>
+                
+                </div>
+           
+        }
+     }
+     
+     </div>
+                

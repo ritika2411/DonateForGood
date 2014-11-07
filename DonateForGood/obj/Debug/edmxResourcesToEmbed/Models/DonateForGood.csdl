@@ -1,0 +1,539 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DonateForGoodModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="CityId" />
+    </Key>
+    <Property Name="CityId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CityName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="StateId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="State" Relationship="Self.FK_City_0" FromRole="City" ToRole="State" />
+    <NavigationProperty Name="Locations" Relationship="Self.FK_Location_0" FromRole="City" ToRole="Location" />
+    <NavigationProperty Name="NGODetails" Relationship="Self.FK_NGODetail_1" FromRole="City" ToRole="NGODetail" />
+  </EntityType>
+  <EntityType Name="CommentsOnRecentActivity">
+    <Key>
+      <PropertyRef Name="CommentId" />
+    </Key>
+    <Property Name="CommentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ItemPostID" Type="Int32" Nullable="false" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="Name" Type="Int32" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="ItemPost" Relationship="Self.FK_CommentsOnRecentActivities_0" FromRole="CommentsOnRecentActivities" ToRole="ItemPost" />
+    <NavigationProperty Name="User" Relationship="Self.FK_CommentsOnRecentActivities_1" FromRole="CommentsOnRecentActivities" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="CountryId" />
+    </Key>
+    <Property Name="CountryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CountryName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="NGODetails" Relationship="Self.FK_NGODetail_4" FromRole="Country" ToRole="NGODetail" />
+    <NavigationProperty Name="States" Relationship="Self.FK_State_0" FromRole="Country" ToRole="State" />
+  </EntityType>
+  <EntityType Name="ItemCategory">
+    <Key>
+      <PropertyRef Name="ItemCategoryId" />
+    </Key>
+    <Property Name="ItemCategoryId" Type="Int32" Nullable="false" />
+    <Property Name="ItemCategoryName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="ItemPosts" Relationship="Self.FK_ItemPost_0" FromRole="ItemCategory" ToRole="ItemPost" />
+  </EntityType>
+  <EntityType Name="ItemCollectPreference">
+    <Key>
+      <PropertyRef Name="ItemCollectPreferenceId" />
+    </Key>
+    <Property Name="ItemCollectPreferenceId" Type="Int32" Nullable="false" />
+    <Property Name="ItemCollectPreferenceName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="ItemPosts" Relationship="Self.FK_ItemPost_3" FromRole="ItemCollectPreference" ToRole="ItemPost" />
+  </EntityType>
+  <EntityType Name="ItemPost">
+    <Key>
+      <PropertyRef Name="ItemPostId" />
+    </Key>
+    <Property Name="ItemPostId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ItemCategoryId_" Type="Int32" Nullable="false" />
+    <Property Name="LocationId_" Type="Int32" Nullable="false" />
+    <Property Name="ItemName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="EmailAddress_" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Photo1" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="Photo2" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="Photo3" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="ModifiedOn" Type="DateTime" Precision="3" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="ItemStatusId" Type="Int32" />
+    <Property Name="ContactByEmail" Type="Boolean" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="ContactByPhone" Type="Boolean" />
+    <Property Name="DisplayMyPhoneNo" Type="Boolean" />
+    <Property Name="DisplayMyEmail_" Type="Boolean" />
+    <Property Name="ItemCollectPreferenceId" Type="Int32" />
+    <Property Name="UserId" Type="Int32" />
+    <NavigationProperty Name="CommentsOnRecentActivities" Relationship="Self.FK_CommentsOnRecentActivities_0" FromRole="ItemPost" ToRole="CommentsOnRecentActivities" />
+    <NavigationProperty Name="ItemCategory" Relationship="Self.FK_ItemPost_0" FromRole="ItemPost" ToRole="ItemCategory" />
+    <NavigationProperty Name="ItemCollectPreference" Relationship="Self.FK_ItemPost_3" FromRole="ItemPost" ToRole="ItemCollectPreference" />
+    <NavigationProperty Name="Location" Relationship="Self.FK_ItemPost_1" FromRole="ItemPost" ToRole="Location" />
+    <NavigationProperty Name="ItemStatu" Relationship="Self.FK_ItemPost_2" FromRole="ItemPost" ToRole="ItemStatus" />
+    <NavigationProperty Name="User" Relationship="Self.FK_ItemPost_4" FromRole="ItemPost" ToRole="User" />
+    <NavigationProperty Name="Kudos" Relationship="Self.FK_Kudos_0" FromRole="ItemPost" ToRole="Kudos" />
+  </EntityType>
+  <EntityType Name="ItemStatu">
+    <Key>
+      <PropertyRef Name="ItemStatusId" />
+    </Key>
+    <Property Name="ItemStatusId" Type="Int32" Nullable="false" />
+    <Property Name="ItemStatusName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="ItemPosts" Relationship="Self.FK_ItemPost_2" FromRole="ItemStatus" ToRole="ItemPost" />
+  </EntityType>
+  <EntityType Name="Kudo">
+    <Key>
+      <PropertyRef Name="KudosId" />
+    </Key>
+    <Property Name="KudosId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="NGOUserId" Type="Int32" Nullable="false" />
+    <Property Name="ItemPostId" Type="Int32" />
+    <NavigationProperty Name="ItemPost" Relationship="Self.FK_Kudos_0" FromRole="Kudos" ToRole="ItemPost" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Kudo_0" FromRole="Kudos" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Location">
+    <Key>
+      <PropertyRef Name="LocationId" />
+    </Key>
+    <Property Name="LocationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LocationName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CityId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="City" Relationship="Self.FK_Location_0" FromRole="Location" ToRole="City" />
+    <NavigationProperty Name="ItemPosts" Relationship="Self.FK_ItemPost_1" FromRole="Location" ToRole="ItemPost" />
+    <NavigationProperty Name="NGODetails" Relationship="Self.FK_NGODetail_2" FromRole="Location" ToRole="NGODetail" />
+  </EntityType>
+  <EntityType Name="NGODetail">
+    <Key>
+      <PropertyRef Name="NGODetailId" />
+    </Key>
+    <Property Name="NGODetailId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="WebSiteURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ContactNumber1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="ContactPersonName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Address1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Address2" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="CityId" Type="Int32" />
+    <Property Name="LocationId" Type="Int32" />
+    <Property Name="StateId" Type="Int32" />
+    <Property Name="CountryId" Type="Int32" />
+    <Property Name="Zipcode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Landmark" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="City" Relationship="Self.FK_NGODetail_1" FromRole="NGODetail" ToRole="City" />
+    <NavigationProperty Name="Country" Relationship="Self.FK_NGODetail_4" FromRole="NGODetail" ToRole="Country" />
+    <NavigationProperty Name="Location" Relationship="Self.FK_NGODetail_2" FromRole="NGODetail" ToRole="Location" />
+    <NavigationProperty Name="User" Relationship="Self.FK_NGODetail_0" FromRole="NGODetail" ToRole="User" />
+    <NavigationProperty Name="State" Relationship="Self.FK_NGODetail_3" FromRole="NGODetail" ToRole="State" />
+  </EntityType>
+  <EntityType Name="Review">
+    <Key>
+      <PropertyRef Name="ReviewId" />
+    </Key>
+    <Property Name="ReviewId" Type="Int32" Nullable="false" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="ReviewTitle" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ReviewComment_" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Rating_" Type="Int32" />
+    <Property Name="UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Review_0" FromRole="Review" ToRole="User" />
+  </EntityType>
+  <EntityType Name="SecurityQuestion">
+    <Key>
+      <PropertyRef Name="SecurityQuestionID" />
+    </Key>
+    <Property Name="SecurityQuestionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="QuestionTitle" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Users" Relationship="Self.FK_User_1" FromRole="SecurityQuestion" ToRole="User" />
+  </EntityType>
+  <EntityType Name="State">
+    <Key>
+      <PropertyRef Name="StateId" />
+    </Key>
+    <Property Name="StateId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StateName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CountryId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Cities" Relationship="Self.FK_City_0" FromRole="State" ToRole="City" />
+    <NavigationProperty Name="Country" Relationship="Self.FK_State_0" FromRole="State" ToRole="Country" />
+    <NavigationProperty Name="NGODetails" Relationship="Self.FK_NGODetail_3" FromRole="State" ToRole="NGODetail" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserTypeId" Type="Int32" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="EmailAddress" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SecurityAnswer" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="SecurityQuestionID" Type="Int32" />
+    <NavigationProperty Name="CommentsOnRecentActivities" Relationship="Self.FK_CommentsOnRecentActivities_1" FromRole="User" ToRole="CommentsOnRecentActivities" />
+    <NavigationProperty Name="ItemPosts" Relationship="Self.FK_ItemPost_4" FromRole="User" ToRole="ItemPost" />
+    <NavigationProperty Name="Kudos" Relationship="Self.FK_Kudo_0" FromRole="User" ToRole="Kudos" />
+    <NavigationProperty Name="NGODetails" Relationship="Self.FK_NGODetail_0" FromRole="User" ToRole="NGODetail" />
+    <NavigationProperty Name="Reviews" Relationship="Self.FK_Review_0" FromRole="User" ToRole="Review" />
+    <NavigationProperty Name="SecurityQuestion" Relationship="Self.FK_User_1" FromRole="User" ToRole="SecurityQuestion" />
+    <NavigationProperty Name="UserType" Relationship="Self.FK_User_0" FromRole="User" ToRole="UserType" />
+  </EntityType>
+  <EntityType Name="UserType">
+    <Key>
+      <PropertyRef Name="UserTypeId" />
+    </Key>
+    <Property Name="UserTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserTypeName" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="510" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Users" Relationship="Self.FK_User_0" FromRole="UserType" ToRole="User" />
+  </EntityType>
+  <Association Name="FK_City_0">
+    <End Role="State" Type="Self.State" Multiplicity="1" />
+    <End Role="City" Type="Self.City" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="State">
+        <PropertyRef Name="StateId" />
+      </Principal>
+      <Dependent Role="City">
+        <PropertyRef Name="StateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Location_0">
+    <End Role="City" Type="Self.City" Multiplicity="1" />
+    <End Role="Location" Type="Self.Location" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="CityId" />
+      </Principal>
+      <Dependent Role="Location">
+        <PropertyRef Name="CityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NGODetail_1">
+    <End Role="City" Type="Self.City" Multiplicity="0..1" />
+    <End Role="NGODetail" Type="Self.NGODetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="CityId" />
+      </Principal>
+      <Dependent Role="NGODetail">
+        <PropertyRef Name="CityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CommentsOnRecentActivities_0">
+    <End Role="ItemPost" Type="Self.ItemPost" Multiplicity="1" />
+    <End Role="CommentsOnRecentActivities" Type="Self.CommentsOnRecentActivity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ItemPost">
+        <PropertyRef Name="ItemPostId" />
+      </Principal>
+      <Dependent Role="CommentsOnRecentActivities">
+        <PropertyRef Name="ItemPostID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CommentsOnRecentActivities_1">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="CommentsOnRecentActivities" Type="Self.CommentsOnRecentActivity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="CommentsOnRecentActivities">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NGODetail_4">
+    <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
+    <End Role="NGODetail" Type="Self.NGODetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="CountryId" />
+      </Principal>
+      <Dependent Role="NGODetail">
+        <PropertyRef Name="CountryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_State_0">
+    <End Role="Country" Type="Self.Country" Multiplicity="1" />
+    <End Role="State" Type="Self.State" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="CountryId" />
+      </Principal>
+      <Dependent Role="State">
+        <PropertyRef Name="CountryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ItemPost_0">
+    <End Role="ItemCategory" Type="Self.ItemCategory" Multiplicity="1" />
+    <End Role="ItemPost" Type="Self.ItemPost" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ItemCategory">
+        <PropertyRef Name="ItemCategoryId" />
+      </Principal>
+      <Dependent Role="ItemPost">
+        <PropertyRef Name="ItemCategoryId_" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ItemPost_3">
+    <End Role="ItemCollectPreference" Type="Self.ItemCollectPreference" Multiplicity="0..1" />
+    <End Role="ItemPost" Type="Self.ItemPost" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ItemCollectPreference">
+        <PropertyRef Name="ItemCollectPreferenceId" />
+      </Principal>
+      <Dependent Role="ItemPost">
+        <PropertyRef Name="ItemCollectPreferenceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ItemPost_1">
+    <End Role="Location" Type="Self.Location" Multiplicity="1" />
+    <End Role="ItemPost" Type="Self.ItemPost" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Location">
+        <PropertyRef Name="LocationId" />
+      </Principal>
+      <Dependent Role="ItemPost">
+        <PropertyRef Name="LocationId_" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ItemPost_2">
+    <End Role="ItemStatus" Type="Self.ItemStatu" Multiplicity="0..1" />
+    <End Role="ItemPost" Type="Self.ItemPost" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ItemStatus">
+        <PropertyRef Name="ItemStatusId" />
+      </Principal>
+      <Dependent Role="ItemPost">
+        <PropertyRef Name="ItemStatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ItemPost_4">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="ItemPost" Type="Self.ItemPost" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="ItemPost">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Kudos_0">
+    <End Role="ItemPost" Type="Self.ItemPost" Multiplicity="0..1" />
+    <End Role="Kudos" Type="Self.Kudo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ItemPost">
+        <PropertyRef Name="ItemPostId" />
+      </Principal>
+      <Dependent Role="Kudos">
+        <PropertyRef Name="ItemPostId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Kudo_0">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Kudos" Type="Self.Kudo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Kudos">
+        <PropertyRef Name="NGOUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NGODetail_2">
+    <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+    <End Role="NGODetail" Type="Self.NGODetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Location">
+        <PropertyRef Name="LocationId" />
+      </Principal>
+      <Dependent Role="NGODetail">
+        <PropertyRef Name="LocationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NGODetail_0">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="NGODetail" Type="Self.NGODetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="NGODetail">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NGODetail_3">
+    <End Role="State" Type="Self.State" Multiplicity="0..1" />
+    <End Role="NGODetail" Type="Self.NGODetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="State">
+        <PropertyRef Name="StateId" />
+      </Principal>
+      <Dependent Role="NGODetail">
+        <PropertyRef Name="StateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Review_0">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Review" Type="Self.Review" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Review">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_1">
+    <End Role="SecurityQuestion" Type="Self.SecurityQuestion" Multiplicity="0..1" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SecurityQuestion">
+        <PropertyRef Name="SecurityQuestionID" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="SecurityQuestionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_0">
+    <End Role="UserType" Type="Self.UserType" Multiplicity="1" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserType">
+        <PropertyRef Name="UserTypeId" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="UserTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DonateForGoodEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Cities" EntityType="Self.City" />
+    <EntitySet Name="CommentsOnRecentActivities" EntityType="Self.CommentsOnRecentActivity" />
+    <EntitySet Name="Countries" EntityType="Self.Country" />
+    <EntitySet Name="ItemCategories" EntityType="Self.ItemCategory" />
+    <EntitySet Name="ItemCollectPreferences" EntityType="Self.ItemCollectPreference" />
+    <EntitySet Name="ItemPosts" EntityType="Self.ItemPost" />
+    <EntitySet Name="ItemStatus" EntityType="Self.ItemStatu" />
+    <EntitySet Name="Kudos" EntityType="Self.Kudo" />
+    <EntitySet Name="Locations" EntityType="Self.Location" />
+    <EntitySet Name="NGODetails" EntityType="Self.NGODetail" />
+    <EntitySet Name="Reviews" EntityType="Self.Review" />
+    <EntitySet Name="SecurityQuestions" EntityType="Self.SecurityQuestion" />
+    <EntitySet Name="States" EntityType="Self.State" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <EntitySet Name="UserTypes" EntityType="Self.UserType" />
+    <AssociationSet Name="FK_City_0" Association="Self.FK_City_0">
+      <End Role="State" EntitySet="States" />
+      <End Role="City" EntitySet="Cities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Location_0" Association="Self.FK_Location_0">
+      <End Role="City" EntitySet="Cities" />
+      <End Role="Location" EntitySet="Locations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NGODetail_1" Association="Self.FK_NGODetail_1">
+      <End Role="City" EntitySet="Cities" />
+      <End Role="NGODetail" EntitySet="NGODetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CommentsOnRecentActivities_0" Association="Self.FK_CommentsOnRecentActivities_0">
+      <End Role="ItemPost" EntitySet="ItemPosts" />
+      <End Role="CommentsOnRecentActivities" EntitySet="CommentsOnRecentActivities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CommentsOnRecentActivities_1" Association="Self.FK_CommentsOnRecentActivities_1">
+      <End Role="User" EntitySet="Users" />
+      <End Role="CommentsOnRecentActivities" EntitySet="CommentsOnRecentActivities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NGODetail_4" Association="Self.FK_NGODetail_4">
+      <End Role="Country" EntitySet="Countries" />
+      <End Role="NGODetail" EntitySet="NGODetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_State_0" Association="Self.FK_State_0">
+      <End Role="Country" EntitySet="Countries" />
+      <End Role="State" EntitySet="States" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ItemPost_0" Association="Self.FK_ItemPost_0">
+      <End Role="ItemCategory" EntitySet="ItemCategories" />
+      <End Role="ItemPost" EntitySet="ItemPosts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ItemPost_3" Association="Self.FK_ItemPost_3">
+      <End Role="ItemCollectPreference" EntitySet="ItemCollectPreferences" />
+      <End Role="ItemPost" EntitySet="ItemPosts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ItemPost_1" Association="Self.FK_ItemPost_1">
+      <End Role="Location" EntitySet="Locations" />
+      <End Role="ItemPost" EntitySet="ItemPosts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ItemPost_2" Association="Self.FK_ItemPost_2">
+      <End Role="ItemStatus" EntitySet="ItemStatus" />
+      <End Role="ItemPost" EntitySet="ItemPosts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ItemPost_4" Association="Self.FK_ItemPost_4">
+      <End Role="User" EntitySet="Users" />
+      <End Role="ItemPost" EntitySet="ItemPosts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Kudos_0" Association="Self.FK_Kudos_0">
+      <End Role="ItemPost" EntitySet="ItemPosts" />
+      <End Role="Kudos" EntitySet="Kudos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Kudo_0" Association="Self.FK_Kudo_0">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Kudos" EntitySet="Kudos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NGODetail_2" Association="Self.FK_NGODetail_2">
+      <End Role="Location" EntitySet="Locations" />
+      <End Role="NGODetail" EntitySet="NGODetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NGODetail_0" Association="Self.FK_NGODetail_0">
+      <End Role="User" EntitySet="Users" />
+      <End Role="NGODetail" EntitySet="NGODetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NGODetail_3" Association="Self.FK_NGODetail_3">
+      <End Role="State" EntitySet="States" />
+      <End Role="NGODetail" EntitySet="NGODetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Review_0" Association="Self.FK_Review_0">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Review" EntitySet="Reviews" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_1" Association="Self.FK_User_1">
+      <End Role="SecurityQuestion" EntitySet="SecurityQuestions" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_0" Association="Self.FK_User_0">
+      <End Role="UserType" EntitySet="UserTypes" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

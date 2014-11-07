@@ -1,0 +1,39 @@
+﻿@Scripts.Render("~/bundles/modernizr")
+@Scripts.Render("~/bundles/JS")
+@Scripts.Render("~/Scripts/JS/HomePage.js")
+@Styles.Render("~/bundles/bootstrap")
+@Styles.Render("~/Content/CSS/SharedCSS")
+
+@model List<DonateForGood.Models.KudosList>
+
+@{
+    ViewBag.Title = "Success Stories";
+}
+
+
+<div id="wrapper" class="row">
+    <div id="page-wrapper" class="col-md-12">
+    
+        <h3>All Success Stories</h3>
+    @foreach (var item in Model)
+    {
+        <div class="panel panel-success">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="panel-heading">
+                        @item.FirstName wrote :
+                    </div>
+                    <div class="panel-body">
+                        <p>@item.Comment</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <img src="~/Images/Stationary.jpg" alt="Stationary">
+                </div>
+            </div>
+   
+        </div>
+    }
+
+</div>
+    </div>

@@ -1,0 +1,70 @@
+﻿@Scripts.Render("~/bundles/modernizr")
+@Scripts.Render("~/bundles/JS")
+@Scripts.Render("~/Scripts/JS/HomePage.js")
+@Styles.Render("~/bundles/bootstrap")
+@Styles.Render("~/Content/CSS/SharedCSS")
+
+@{
+    Layout = "";
+}
+@model List<DonateForGood.Models.KudosList>
+
+@{
+    int count = 0;
+    foreach (var item in Model)
+    {
+        
+        if(count%2==0)
+        {
+        
+                        <li>
+                            <div class="timeline-badge">
+                                <i class="fa fa-check"></i>
+                            </div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h5 class="timeline-title">@item.FirstName wrote :</h5>
+                                    <p>
+                                        <small class="text-muted"><i class="fa fa-clock-o"></i> </small>
+                                    </p>
+                                </div>
+                                <div class="timeline-body">
+                                    <h6>@item.Comment</h6>
+                                </div>
+                            </div>
+                        </li>
+        }
+        else
+        {
+                        <li class="timeline-inverted">
+                            <div class="timeline-badge warning">
+                                <i class="fa fa-credit-card"></i>
+                            </div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h5 class="timeline-title">@item.FirstName wrote :</h5>
+                                </div>
+                                <div class="timeline-body">
+                                    <h6>@item.Comment</h6>
+                                    
+                                </div>
+                            </div>
+                        </li>
+                       
+        }
+        count++;
+        if (count > 3)
+        { 
+            break;
+        }
+        
+    }
+}
+
+
+@*<div>
+        <div style="float:left">@Html.DisplayFor(modelItem => item.Photo)</div><div style="float:right">@Html.DisplayFor(modelItem => item.Comment)</div>
+        <p></p>
+        <br />
+        <div style="float:left">@Html.DisplayFor(modelItem => item.ItemPost.ItemName)</div><div style="float:right">@Html.DisplayFor(modelItem => item.User.FirstName)</div>
+    </div>*@

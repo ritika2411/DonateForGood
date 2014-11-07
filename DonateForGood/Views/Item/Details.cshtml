@@ -1,0 +1,158 @@
+﻿@model DonateForGood.Models.ItemPost
+
+@{
+    ViewBag.Title = "Details";
+}
+@Scripts.Render("~/Content/CSS/SharedCSS")
+
+@Scripts.Render("~/Content/CSS/Plugins")
+@Scripts.Render("~/Content/css")
+@Scripts.Render("~/bundles/ItemViewer")
+
+
+<div id="wrapper" class="row">
+    <div id="page-wrapper" class="col-md-12">
+
+        <div class="row page-header">
+            <div class="col-md-9">
+                <h1>@Html.DisplayNameFor(model => model.ItemName)</h1>
+            </div>
+            @{
+                var searchString = string.Empty;
+                var ItemCategoryId = string.Empty;
+                var LocationId = string.Empty;
+                if (TempData["searchString"] != null)
+                {
+                    searchString = TempData["searchString"].ToString();
+                }
+                if (TempData["ItemCategoryId"] != null)
+                {
+                    ItemCategoryId = TempData["ItemCategoryId"].ToString();
+                }
+                if (TempData["LocationId"] != null)
+                {
+                    LocationId = TempData["LocationId"].ToString();
+                }
+            }
+            <div class="col-md-3 btn btn-link ">
+                @Html.ActionLink("Back to Search", "Index", new { searchString = @searchString, ItemCategoryId_ = @ItemCategoryId, LocationId_ = @LocationId, Search = "Search" })
+            </div>
+        </div>
+        @{
+            if (Model.Photo1 != null)
+            {
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="thumbnails">
+                            <img src="data:image;base64,@System.Convert.ToBase64String(Model.Photo1)" height="150" width="150" onmouseover="showDivImageDisplay(this);" onmouseout="hideDivImageDisplay();" />
+                        </div>
+                    </div>
+                </div>
+                <span id="coord"></span>
+                <div id="divImageDisplay" style="position:absolute;z-index:2;">
+                </div>
+            }
+        }
+        <div class="row">
+            <div class="col-md-8">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <content>Quantity</content>
+                            </div>
+                            <div class="col-md-5">
+                                @Html.DisplayFor(model => model.Quantity)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel-body">
+                        <p>@Html.DisplayFor(model => model.Description)</p>
+                    </div>
+
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <content>Pick-Up Preference</content>
+                            </div>
+                            <div class="col-md-5">
+                                @Html.DisplayFor(model => model.ItemCollectPreference.ItemCollectPreferenceName)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <content>Location </content>
+                            </div>
+                            <div class="col-md-5">
+                                @Html.DisplayFor(model => model.Location.LocationName)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <content>Item Type</content>
+                            </div>
+                            <div class="col-md-5">
+                                @Html.DisplayFor(model => model.ItemCategory.ItemCategoryName)
+                            </div>
+                        </div>
+                    </div>
+                    @if (Model.DisplayMyEmail_ == true)
+                    {
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <content>Email</content>
+                                </div>
+                                <div class="col-md-5">
+                                    @Html.DisplayFor(model => model.EmailAddress_)
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    @if (Model.DisplayMyPhoneNo == true)
+                    {
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <content>Phone</content>
+                                </div>
+                                <div class="col-md-5">
+                                    @Html.DisplayFor(model => model.PhoneNumber)
+                                </div>
+                            </div>
+
+                        </div>
+                    }
+                </div>
+            </div>
+            @if (Model.ContactByEmail == true)
+            {
+                string emailAdress = Model.EmailAddress_;
+
+                <div class="col-md-4">
+                    <div class="panel panel-default">
+
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Contact User</h3>
+                        </div>
+                        <div class="panel-body">
+                            <form role="form" method="post" action="@Url.Action("SendEmail", "Item", new { toList = emailAdress, subject = "Donate For Good - Contact" })">
+                                <fieldset>
+                                    <div class="form-group">
+                                        <textarea class="form-control" placeholder="Message" name="EmailDescription" rows="8" cols="100"></textarea>
+                                    </div>
+                                    <input type="submit" name="CreateComment" value="Send" class="btn btn-md btn-success btn-block" />
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>       
+    </div>
+</div>

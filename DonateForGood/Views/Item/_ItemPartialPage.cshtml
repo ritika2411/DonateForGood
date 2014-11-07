@@ -1,0 +1,32 @@
+﻿@model IEnumerable<DonateForGood.Models.ItemPost>
+
+        @if (true == true)
+        {          
+            foreach (var item in Model)
+            {               
+                string ItemName = @item.ItemName;
+                string Description = @item.Description;
+                var Quantity = @item.Quantity;
+                string Location = @item.Location.LocationName;
+                DateTime CreatedDate = @item.CreatedOn.Value;
+                string Day = CreatedDate.ToShortDateString();
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-success">
+                            <div class="panel-heading">
+                                @Html.ActionLink(@ItemName, "Details", new { id = item.ItemPostId })
+                            </div>
+                            <div class="panel-body">
+                                <p>@Description</p>
+                            </div>
+                            <div class="panel-footer">
+                                <div class="col-md-5">Location: @Location</div>
+                                <div class="col-md-5 col-md-push-1">Posted On:@Day</div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            }
+        }

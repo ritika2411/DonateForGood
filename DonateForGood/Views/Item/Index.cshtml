@@ -1,0 +1,52 @@
+﻿@model IEnumerable<DonateForGood.Models.ItemPost>
+@{
+    ViewBag.Title = "Index";
+}
+@Scripts.Render("~/bundles/ItemCreate")
+<div id="wrapper" class="row">
+    <div id="page-wrapper" class="col-md-12">
+
+        <div class="row page-header">
+            <div class="col-md-9">
+                <h3>Search Items</h3>
+            </div>
+            <div class="col-md-3 btn btn-link ">
+                @Html.ActionLink("Post New Item", "Create")
+            </div>
+        </div>
+
+        @using (Html.BeginForm("Index", "Item", FormMethod.Get))
+        {
+            <div class="row">
+                <div class="form-group">
+                    @{
+                        Html.RenderPartial("_ItemCategoryPartialPage");
+                    }
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group ">
+                    <div class="col-md-6">
+                        <input class="form-control" placeholder="Search" name="searchString" id="searchString">
+                        <br />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.DropDownList("ItemCategoryId_", (SelectList)ViewBag.ItemCategoryId_, "Select Category", new { id = "ddlCategory", @class = "form-control" })
+                    </div>
+                    <div class="col-md-3">
+                        @Html.DropDownList("LocationId_", (SelectList)ViewBag.LocationId_, "Select Location", new { @class = "form-control" })
+                    </div>
+                    <div class="col-md-3">
+                        <input type="submit" value="Search" class="btn btn-md btn-success btn-block" name="Search" />
+                    </div>
+                </div>
+            </div>
+            <br />
+            Html.RenderPartial("_ItemPartialPage");
+        }
+    </div>
+</div>

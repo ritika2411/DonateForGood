@@ -1,0 +1,135 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - DFG-Home</title>
+    <link href="~/Images/icon.jpg" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/bootstrap")
+    @Styles.Render("~/Content/CSS/SharedCSS")
+    @Scripts.Render("~/bundles/jquery")
+    <script>
+        $(document).ready(function () {
+            $('.Post').click(function () {
+                $('#resultId').load('@Url.Action("Create","Item")')
+            });
+
+            $(document).ready(function () {
+                $('#resultId').load('@Url.Action("QuickCreate", "Item")')
+            });
+        });
+        
+    </script>
+</head>
+<body>
+    <div class="row">
+        
+            @{
+                if (Session["LoggedInUserId"] == null)
+                {
+                    <div class="col-md-offset-9">
+                    @Html.ActionLink("NGO Login", "Login", "Home")
+                    </div>
+                }
+                else
+                {
+                    <div class="col-md-offset-8">
+                        @Html.Label(Session["LoggedInUserName"].ToString())
+                        @Html.ActionLink("   Logout", "Logout", "Home")
+                    </div>
+                }
+}
+            
+        
+    </div>
+
+    <div class="row" id="navBar">
+        
+        <div class="col-md-4">
+            <div class="panel" style="background-color:mediumpurple">
+               
+                    
+                    <div class="panel-footer">
+                        
+                        
+                        @Html.ActionLink("Want to Donate something?", "Create", "Item")
+                        <div class="clearfix"></div>
+                    </div>
+                            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="panel" style="background-color:red">
+                <div class="panel-footer">
+                    @Html.ActionLink("Search for available Items", "Index", "Item")
+
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="panel" style="background-color:yellowgreen">
+                <div class="panel-footer">
+                   @Html.ActionLink("List of NGOs", "Index", "NGODetails")
+
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div id="resultId" class="col-md-8 panel" style="border-color:grey">
+
+        </div>
+
+        
+
+
+            <div id="RecentActivity" class="col-md-4" >
+
+                @{
+                    Html.RenderAction("RecentActivityPartial", "Home");
+                }
+
+            </div>
+   
+
+
+    </div>
+
+    <div class=" row">
+        <div id="SuccessStories">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <b>Success Stories</b>
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <ul class="timeline">
+                        @{
+                            Html.RenderAction("_KudosListPartial","Kudos");
+                         }
+                      
+                       
+                    </ul>
+                </div>
+                <div class="col-md-offset-10">
+                    @Html.ActionLink("Show more...","Index","Kudos")
+                </div>
+                <!-- /.panel-body -->
+            </div>
+
+
+        </div>
+    </div>
+   
+
+</body>
+</html>

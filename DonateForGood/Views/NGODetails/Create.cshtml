@@ -1,0 +1,239 @@
+﻿@model DonateForGood.Models.NGORegistration
+          
+
+@{
+    ViewBag.Title = "NGO Registration page";
+}
+
+<h4>NGO Registration</h4>
+<hr />
+
+@{
+    byte[] image = Session["imageDataNGO"] as byte[];
+    if (image == null)
+    {
+
+        using (@Html.BeginForm("UploadImage", "Item", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            
+                    
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                @Html.LabelFor(model => model.Photo, "Upload Picture", new { @class = "control-label" })
+                                <input type="file" name="file" />
+                            </div>
+                            <div class="col-md-6">
+                                <input type="submit" value="Upload Image" />
+                            </div>
+                        </div>
+                    </div>
+               
+        }
+    }
+    else
+    {
+        <div class="form-group">
+            @Html.Raw(Session["imageFileNameNGO"] as string)
+        </div>
+    }
+}
+
+
+
+
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+       
+        @Html.ValidationSummary(true)
+
+        <div title="Login Details">
+            <p><b>Login Details</b></p>
+            <div class="form-group">
+                @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "help-block col-md-2" })
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.UserName, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.UserName)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "help-block col-md-2" })
+                <div class="col-md-4">
+                    @Html.PasswordFor(model => model.Password, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Password)
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.SecurityQuestionID, "SecurityQuestion ", htmlAttributes: new { @class = "help-block col-md-2" })
+                <div class="col-md-4">
+                    @Html.DropDownList("SecurityQuestionID", "Select your Security Question")
+                    @Html.ValidationMessageFor(model => model.SecurityQuestionID)
+                </div>
+            </div>
+
+            
+            <div class="form-group">
+                @Html.LabelFor(model => model.SecurityAnswer, htmlAttributes: new { @class = "help-block col-md-2" })
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.SecurityAnswer, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.SecurityAnswer)
+                </div>
+            </div>
+
+        </div>
+
+
+
+        <div title="NGO Details">
+            <br />
+            <p><b>Description of the NGO</b></p>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.FirstName,"NGO Name", htmlAttributes: new { @class = "help-block col-md-2"})
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.FirstName, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.FirstName)
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "help-block col-md-2" })
+                <div class="col-md-4">
+                    @Html.TextAreaFor(model => model.Description, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Description)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.WebSiteURL,"NGO Website URL", htmlAttributes: new { @class = "help-block col-md-2" })
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.WebSiteURL, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.WebSiteURL)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.PhoneNumber,"Contact Number", htmlAttributes: new { @class = "help-block col-md-2" })
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.PhoneNumber, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.PhoneNumber)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ContactNumber1,"Alternate Contact Number", htmlAttributes: new { @class = "help-block col-md-2" })
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.ContactNumber1, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ContactNumber1)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ContactPersonName,"Contact Person", htmlAttributes: new { @class = "help-block col-md-2" })
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.ContactPersonName, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ContactPersonName)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.EmailAddress,"Email Address", htmlAttributes: new { @class = "help-block col-md-2" })
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.EmailAddress, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.EmailAddress)
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Address1, "Address Line 1",htmlAttributes: new { @class = "help-block col-md-2" })
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.Address1, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Address1)
+                </div>
+            </div>
+
+
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Address2, "Address Line 2", htmlAttributes: new { @class = "help-block col-md-2" })
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.Address2, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Address2)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Landmark, htmlAttributes: new { @class = "help-block col-md-2" })
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.Landmark, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Landmark)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.LocationId, "Location ", htmlAttributes: new { @class = "help-block col-md-2" })
+                <div class="col-md-4">
+                    @Html.DropDownList("LocationId", "Select Location")
+                    @Html.ValidationMessageFor(model => model.LocationId)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CityId, "City ", htmlAttributes: new { @class = "help-block col-md-2" })
+                <div class="col-md-4">
+                    @Html.DropDownList("CityId","Select City")
+                    @Html.ValidationMessageFor(model => model.CityId)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Zipcode, htmlAttributes: new { @class = "help-block col-md-2" })
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.Zipcode, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Zipcode)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.StateId, "State ", htmlAttributes: new { @class = "help-block col-md-2" })
+                <div class="col-md-4">
+                    @Html.DropDownList("StateId", "Select Country")
+                    @Html.ValidationMessageFor(model => model.StateId)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CountryId, "Country", htmlAttributes: new { @class = "help-block col-md-2" })
+                <div class="col-md-4">
+                    @Html.DropDownList("CountryId", "Select Country")
+                    @Html.ValidationMessageFor(model => model.CountryId)
+                </div>
+            </div>
+
+           
+
+            
+
+           
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-4">
+                    <input type="submit" value="Create" class="btn btn-md btn-success btn-block" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+

@@ -1,0 +1,164 @@
+﻿@{
+    ViewBag.Title = "Edit Item Post";
+
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/ItemCreate")
+
+@model DonateForGood.Models.ItemPost
+
+<div class="row">
+    <div class="col-md-12 col-md-offset-3">
+        <h3>Edit Item Post</h3>
+    </div>
+</div>
+<br />
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="row">
+        <div class="col-md-12 col-md-offset-2">
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.ItemPostId)
+
+        <div class="row">
+            <div class="form-group">
+                @{
+                    Html.RenderPartial("_ItemCategoryPartialPage");
+                }
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.DropDownListFor(model => model.ItemCategoryId_, null, "Select Category", new { @class = "form-control required", id = "ddlCategory", tabindex = "1"})    
+                        @Html.ValidationMessageFor(model => model.ItemCategoryId_, "Please Select Category")
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.Label("Contact By Phone", new { @class = "help-block col-md-10" })
+                        @Html.CheckBoxFor(model => model.ContactByPhone, new { tabindex = "9" })
+                        @Html.ValidationMessageFor(model => model.ContactByPhone)
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.DropDownListFor(model => model.LocationId_, null, "Select Location", new { tabindex = "1", @class = "form-control required", })   
+                        @Html.ValidationMessageFor(model => model.LocationId_, "Please Select Location")
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.Label("Contact By Email", new { @class = "help-block col-md-10" })
+                        @Html.CheckBoxFor(model => model.ContactByEmail, new { @disabled = "disabled", tabindex = "8" })
+                        @Html.ValidationMessageFor(model => model.ContactByEmail)
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.TextBoxFor(model => model.ItemName, new { placeholder = "Item Name", @class = "form-control", @Value = ViewBag.ItemName, tabindex = "3" })
+                        @Html.ValidationMessageFor(model => model.ItemName)
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.Label("Display My PhoneNo", new { @class = "help-block col-md-10" })
+                        @Html.CheckBoxFor(model => model.DisplayMyPhoneNo, new { id = "chkDisplayMyPhoneNo", tabindex = "10" })
+                        @Html.ValidationMessageFor(model => model.DisplayMyPhoneNo)
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.TextBoxFor(model => model.PhoneNumber, new { @Value = ViewBag.PhoneNumber, tabindex = "4", placeholder = "Phone Number", @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.PhoneNumber, "Please Enter Phone Number")
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.Label("Display My Email", new { @class = "help-block col-md-10" })
+                        @Html.CheckBoxFor(model => model.DisplayMyEmail_, new { id = "chkDisplayMyEmail", tabindex = "11" })
+                        @Html.ValidationMessageFor(model => model.DisplayMyEmail_)
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.TextBoxFor(model => model.EmailAddress_, new { @Value = ViewBag.EmailAddress, tabindex = "5", placeholder = "Email Address", @class = "form-control required" })
+                        @Html.ValidationMessageFor(model => model.EmailAddress_, "Please Enter Email Address")
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        &nbsp;&nbsp;
+                        @Html.RadioButtonFor(model => model.ItemCollectPreferenceId, "1", new {id = "rdbPickUp", color = "#737373", tabindex = "12" }) PickUp
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        @Html.RadioButtonFor(model => model.ItemCollectPreferenceId, "2", new {id = "rdbDrop", color = "#737373", tabindex = "13" }) Drop
+                        @Html.ValidationMessageFor(model => model.ItemCollectPreferenceId)
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.TextBoxFor(model => model.Quantity, new { @Value = ViewBag.Quantity, tabindex = "6", placeholder = "Quantity", @class = "form-control required" })
+                        @Html.ValidationMessageFor(model => model.Quantity, "Please Enter Valid Quantity")
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.TextBoxFor(model => model.Description, new { @Value = ViewBag.Description, tabindex = "7", maxlength = 1000, style = "width: 400px; height: 80px;", placeholder = "Description", @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Description)
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Photo1, "Item Picture", new { @class = "control-label col-md-20" })
+                        @using (Html.BeginForm("UploadImage", "ItemController", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            <div class="row">
+                                <input type="file" name="uploadImages" multiple="multiple" class="input-files" tabindex="14" />
+                                <input type="submit" name="button" value="Upload" class="btn btn-default" tabindex="15" />
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-3">
+                <input type="submit" value="Post" class="btn btn-md btn-success btn-block" onclick="return Validate(this);" tabindex="16" />
+            </div>
+        </div>
+    </div>
+    </div>
+}
+
+

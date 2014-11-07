@@ -1,0 +1,68 @@
+﻿@model IEnumerable<DonateForGood.Models.NGORegistration>
+
+@{
+    ViewBag.Title = "List of NGOs";
+}
+
+<h3>List of NGOs</h3>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Name of NGO")
+        </th>
+        <th>
+            @Html.DisplayName("Contact Number")
+        </th>
+        <th>
+            @Html.DisplayName("Email Address")
+        </th>
+        <th>
+            @Html.DisplayName("Website")
+        </th>
+        <th>
+            @Html.DisplayName("City")
+        </th>
+        <th>
+            @Html.DisplayName("")
+        </th>
+
+  </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PhoneNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmailAddress)
+        </td>
+        <td>
+               
+          @{
+              
+        var link = @item.WebSiteURL;
+       if (link!=null && !link.StartsWith("http://")) link = "http://"+link; 
+       
+       }
+
+        <a href="@link">@item.WebSiteURL</a>
+ 
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CityName)
+        </td>
+        
+        
+        <td>
+            @*@Html.ActionLink("Edit", "Edit", new { id = item.User.UserId }) |*@
+            @Html.ActionLink("Details", "Details", new {  id=item.UserId  }) 
+            @*@Html.ActionLink("Delete", "Delete", new { id = item.User.UserId })*@
+        </td>
+    </tr>
+}
+
+</table>

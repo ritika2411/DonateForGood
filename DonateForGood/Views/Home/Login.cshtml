@@ -1,0 +1,57 @@
+﻿@model DonateForGood.Models.User
+
+@{
+    ViewBag.Title = "NGO LogIn";
+}
+<title>@ViewBag.Title</title>
+<h3>NGO Login</h3>
+<div class="row">
+    <div class="col-md-8">
+        
+            @using (Html.BeginForm("Login", "Home"))
+            {
+                @Html.AntiForgeryToken()
+                
+                <hr />
+                @Html.ValidationSummary(true)
+                <div class="form-group">
+                    @Html.LabelFor(m => m.UserName, new { @class = "help-block col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control required" })
+                        @Html.ValidationMessageFor(m => m.UserName)
+</div>
+                    </div>
+                <div><br /></div>
+                <br />
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Password, new { @class = "help-block col-md-2" })
+                    <div class="col-md-10">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control required" })
+                        
+                        @Html.ValidationMessageFor(m => m.Password)
+                    </div>
+                </div>
+
+                
+                <div><br /></div>
+                <div class="form-group">
+                    <br />
+                    <div class="col-md-offset-2 col-md-6">
+                        <input type="submit" value="Log In" class="btn btn-md btn-success btn-block" />
+                    </div>
+                </div>
+                
+                
+                <p>
+                    <br />
+                    New NGO? @Html.ActionLink("Register", "Create", "NGODetails")
+                </p>
+
+            }
+        
+    </div>
+    
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
