@@ -3,6 +3,7 @@
 @Scripts.Render("~/Scripts/JS/HomePage.js")
 @Styles.Render("~/bundles/bootstrap")
 @Styles.Render("~/Content/CSS/SharedCSS")
+@Scripts.Render("~/bundles/ItemViewer")
 
 @model List<DonateForGood.Models.KudosList>
 
@@ -12,28 +13,39 @@
 
 
 <div id="wrapper" class="row">
-    <div id="page-wrapper" class="col-md-12">
-    
-        <h3>All Success Stories</h3>
-    @foreach (var item in Model)
-    {
-        <div class="panel panel-success">
+    <div id="page-wrapper" class="col-md-12">        
+        <div class="row page-header">
+            <h3>All Success Stories</h3>
+        </div>
+        @foreach (var item in Model)
+        {
             <div class="row">
-                <div class="col-md-8">
-                    <div class="panel-heading">
-                        @item.FirstName wrote :
+                <div class="col-md-2">
+                    <div id="thumbnails">
+                        @if (@item.Photo != null)
+                        {
+                            <img src="data:image;base64,@System.Convert.ToBase64String(@item.Photo)" height="100" width="100" onmouseover="showDivImageDisplay(this);" onmouseout="hideDivImageDisplay();" />
+                        }
+                        else
+                        {
+                            <img src="~/Images/NoImage.jpg" height="100" width="100" />
+                        }
                     </div>
-                    <div class="panel-body">
-                        <p>@item.Comment</p>
-                    </div>
+                    <span id="coord"></span>
+                    <div id="divImageDisplay" style="position:absolute;z-index:2;"></div>
                 </div>
-                <div class="col-md-4">
-                    <img src="~/Images/Stationary.jpg" alt="Stationary">
+                <div class="col-md-9">
+                    <div class="panel panel-success">
+                        <div class="panel-heading">
+                            @item.FirstName wrote :
+                        </div>
+                        <div class="panel-body">
+                            <p>@item.Comment</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-   
-        </div>
-    }
+        }
 
-</div>
     </div>
+</div>

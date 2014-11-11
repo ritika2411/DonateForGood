@@ -16,41 +16,6 @@ namespace DonateForGood.Controllers
     {
         private DonateForGoodEntities db = new DonateForGoodEntities();
 
-
-
-        [HttpPost]
-        public ActionResult UploadImage(HttpPostedFileBase file)
-        {
-            byte[] imageData = null;
-
-            if (file.ContentLength <= 0)
-            {
-                return RedirectToAction("Create", "Kudos");
-            }
-
-            if (file.ContentLength > 0)
-            {
-
-                using (var binaryReader = new BinaryReader(file.InputStream))
-                {
-                    imageData = binaryReader.ReadBytes(file.ContentLength);
-                }
-            }
-
-            Session["imageDataNGO"] = imageData;
-            Session["imageFileNameNGO"] = file.FileName;
-
-            return RedirectToAction("Create", "NGODetails");
-
-
-        }
-
-        public ActionResult UploadImage()
-        {
-            return View();
-        }
-
-
         // POST: /Account/Login
         [HttpPost]
         [AllowAnonymous]
@@ -67,13 +32,9 @@ namespace DonateForGood.Controllers
             return View();
         }
 
-
-
         // GET: NGODetails
         public ActionResult Index()
         {
-            //var nGODetails = db.NGODetails.Include(n => n.City).Include(n => n.Country).Include(n => n.Location).Include(n => n.State).Include(n => n.User);
-
             var getNGOList = (from tableUser in db.Users
                                   join tableNgoList in db.NGODetails
                                   on tableUser.UserId equals tableNgoList.UserId
@@ -89,9 +50,6 @@ namespace DonateForGood.Controllers
 
                               }).ToList();
 
-
-
-
             return View(getNGOList.ToList());
         }
 
@@ -102,8 +60,7 @@ namespace DonateForGood.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            NGODetail nGODetail = db.NGODetails.Find(id);
-           
+            NGODetail nGODetail = db.NGODetails.Find(id);           
 
             // get NGO Detail
             var getNGODetail = (from tableUser in db.Users
@@ -183,8 +140,13 @@ namespace DonateForGood.Controllers
             int userId = (from tableUser in db.Users
                        where tableUser.FirstName == user.FirstName
                        select tableUser.UserId).First();
-            
 
+            byte[] imageValue = null;
+
+            if (Session["imageData"] != null)
+            {
+                imageValue = Session["imageData"] as byte[];
+            }
             
             NGODetail ngoDetails = new NGODetail
             {
@@ -200,8 +162,8 @@ namespace DonateForGood.Controllers
                 CityId=nGORegisration.CityId,
                 Zipcode=nGORegisration.Zipcode,
                 StateId=nGORegisration.StateId,
-                CountryId=nGORegisration.CountryId
-
+                CountryId=nGORegisration.CountryId,
+                Photo=imageValue
             };
 
 
@@ -285,34 +247,6 @@ namespace DonateForGood.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
-
-
-        //// GET: NGODetails/Details/5
-        //public ActionResult Details(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    NGODetail nGODetail = db.NGODetails.Find(id);
-        //    if (nGODetail == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(nGODetail);
-        //}
-
-        //// POST: NGODetails/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult DeleteConfirmed(int id)
-        //{
-        //    NGODetail nGODetail = db.NGODetails.Find(id);
-        //    db.NGODetails.Remove(nGODetail);
-        //    db.SaveChanges();
-        //    return RedirectToAction("Index");
-        //}
 
         protected override void Dispose(bool disposing)
         {

@@ -3,21 +3,18 @@
 @{
     ViewBag.Title = "NGO Detail";
 }
-
+@Scripts.Render("~/bundles/ItemViewer")
 <br />
 <div id="wrapper" class="row">
     <div id="page-wrapper" class="col-md-12">
-
-        <div class="row">
+        <div class="row page-header">
             <div class="col-md-9">
                 <h3>NGO Detail</h3>
             </div>
-            <div class="col-md-3">
-                <p>
-                    @Html.ActionLink("Back to List of NGOs", "Index")
-                </p>
+            <div class="col-md-3">                
+                    @Html.ActionLink("Back to List of NGOs", "Index")               
             </div>
-        </div>
+        </div>       
 
         <div class="row">
             <div class="col-md-8">
@@ -52,7 +49,7 @@
                             <div class="col-md-5">
                                 @{
                                     var link = Model.First().WebSiteURL;
-                                    if (link!=null && !link.StartsWith("http://"))
+                                    if (!link.StartsWith("http://"))
                                     {
                                         link = "http://" + link;
                                     }
@@ -130,12 +127,24 @@
 
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
 
                 <div class="panel panel-default">
 
                     <div class="panel-body">
-                        <img src="~/Images/Stationary.jpg" alt="Stationary">
+                        <div id="thumbnails" class="col-md-offset-1">
+                            @if (Model.First().Photo != null)
+                            {
+                                <img src="data:image;base64,@System.Convert.ToBase64String(Model.First().Photo)" height="150" width="150" onmouseover="showDivImageDisplay(this);" onmouseout="hideDivImageDisplay();" />
+                            }
+                            else
+                            {
+                                <img src="~/Images/NoImage.jpg" height="150" width="150" />
+                            }
+                        </div>
+                        <span id="coord"></span>
+                        <div id="divImageDisplay" style="position:absolute;z-index:2;">
+                        </div>
                     </div>
                 </div>
             </div>

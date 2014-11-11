@@ -15,39 +15,19 @@ namespace DonateForGood.Controllers
     {
         private DonateForGoodEntities db = new DonateForGoodEntities();
 
-
-
-
         [HttpPost]
-        public ActionResult UploadImage(HttpPostedFileBase file)
+        public void UploadImage(HttpPostedFileBase file)
         {
             byte[] imageData = null;
-
-            if (file.ContentLength <= 0)
+            if (file != null && file.ContentLength > 0)
             {
-                return RedirectToAction("Create", "Kudos");
-            }
-
-            if (file.ContentLength > 0)
-            {
-
                 using (var binaryReader = new BinaryReader(file.InputStream))
                 {
                     imageData = binaryReader.ReadBytes(file.ContentLength);
                 }
             }
-
-            Session["imageDataKudos"] = imageData;
-            Session["imageFileNameKudos"] = file.FileName;
-
-            return RedirectToAction("Create", "Kudos");
-
-
-        }
-
-        public ActionResult UploadImage()
-        {
-            return View();
+            Session["imageData"] = imageData;
+            Session["imageFileName"] = file.FileName;
         }
 
         // GET: /Kudos/
@@ -97,9 +77,6 @@ namespace DonateForGood.Controllers
             return View();
         }
 
-
-
-
         // POST: /Kudos/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -107,20 +84,18 @@ namespace DonateForGood.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include="KudosId,Comment,Photo,NGOUserId,ItemPostId")] Kudo kudo)
         {
-            
-
             if (ModelState.IsValid)
             {
-                
-                kudo.Photo = Session["imageDataKudos"] as byte[];
+                if (Session["imageData"] != null)
+                    kudo.Photo = Session["imageData"] as byte[];
                 db.Kudos.Add(kudo);
                 db.SaveChanges();
-                Session["imageDataKudos"] = null;
-                Session["imageFileNameKudos"] = null;
+                Session["imageData"] = null;
+                Session["imageFileName"] = null;
                 return RedirectToAction("Index");
             }
-            Session["imageDataKudos"] = null;
-            Session["imageFileNameKudos"] = null;
+            Session["imageData"] = null;
+            Session["imageFileName"] = null;
             ViewBag.ItemPostId = new SelectList(db.ItemPosts, "ItemPostId", "ItemName", kudo.ItemPostId);
             ViewBag.NGOUserId = new SelectList(db.Users, "UserId", "FirstName", kudo.NGOUserId);
             return View(kudo);

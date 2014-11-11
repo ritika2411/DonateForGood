@@ -5,7 +5,7 @@ function GetFileSize(fileid) {
         var fileSize = 0;
         //for IE
         // if ($.browser.msie) {
-        if(typeof(window.ActiveXObject)=="undefined"){
+        if (typeof (window.ActiveXObject) == "undefined") {
             //before making an object of ActiveXObject, 
             //please make sure ActiveX is enabled in your IE browser
             var objFSO = new ActiveXObject("Scripting.FileSystemObject"); var filePath = $("#" + fileid)[0].value;
@@ -37,18 +37,9 @@ function getNameFromPath(strFilepath) {
     }
 }
 
-$("#btnSubmit").on("click", function () {
-    if ($('#fileToUpload').val() == "") {
-        $("#spanfile").html("Please upload file");
-        return false;
-    }
-    else {
-        return checkfile();
-    }
-});
-
-function checkfile() {
-    var file = getNameFromPath($("#fileToUpload").val());
+function checkfile() {    
+    $("#spanfile").text("");
+    var file = getNameFromPath($("#file").val());
     if (file != null) {
         var extension = file.substr((file.lastIndexOf('.') + 1));
 
@@ -71,20 +62,39 @@ function checkfile() {
         return false;
     }
     else {
-        var size = GetFileSize('fileToUpload');
+        var size = GetFileSize('file');
         if (size > 3) {
             $("#spanfile").text("You can upload file up to 3 MB");
             return false;
         }
         else {
+            return true;
             $("#spanfile").text("");
         }
     }
+    return true;
 }
 
 $(function () {
-    $("#fileToUpload").change(function () {
+    $("#file").change(function () {
         checkfile();
     });
 });
 
+$(function () {
+    $("#go").click(function () {        
+        if ($('#file').val() == "") {
+            $("#spanfile").html("Please upload file");
+            return false;
+        }
+        else {
+            if (checkfile()) {
+                var xhr = new XMLHttpRequest();
+                var fd = new FormData();
+                fd.append("file", document.getElementById('file').files[0]);
+                xhr.open("POST", "/Item/UploadImage/", true);
+                xhr.send(fd);
+            }
+        }
+    });
+});

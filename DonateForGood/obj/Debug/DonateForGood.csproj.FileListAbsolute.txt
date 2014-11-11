@@ -46,42 +46,4 @@ D:\DFG\Aapkivani\DFG Final\DonateForGoodFinal\DonateForGood\DonateForGood\bin\Mi
 D:\DFG\Aapkivani\DFG Final\DonateForGoodFinal\DonateForGood\DonateForGood\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 D:\DFG\Aapkivani\DFG Final\DonateForGoodFinal\DonateForGood\DonateForGood\bin\Images\Stationary.jpg
 D:\DFG\Aapkivani\DFG Final\DonateForGoodFinal\DonateForGood\DonateForGood\obj\Debug\DonateForGood.csprojResolveAssemblyReference.cache
-D:\GitHub\DonateForGood\DonateForGood\bin\Images\FoodItem.jpg
-D:\GitHub\DonateForGood\DonateForGood\bin\Images\Stationary.jpg
-D:\GitHub\DonateForGood\DonateForGood\bin\DonateForGood.dll.config
-D:\GitHub\DonateForGood\DonateForGood\bin\DonateForGood.dll
-D:\GitHub\DonateForGood\DonateForGood\bin\DonateForGood.pdb
-D:\GitHub\DonateForGood\DonateForGood\bin\Antlr3.Runtime.dll
-D:\GitHub\DonateForGood\DonateForGood\bin\Microsoft.Owin.Host.SystemWeb.dll
-D:\GitHub\DonateForGood\DonateForGood\bin\Microsoft.Owin.Security.Facebook.dll
-D:\GitHub\DonateForGood\DonateForGood\bin\Microsoft.Owin.Security.Google.dll
-D:\GitHub\DonateForGood\DonateForGood\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
-D:\GitHub\DonateForGood\DonateForGood\bin\Microsoft.Owin.Security.Twitter.dll
-D:\GitHub\DonateForGood\DonateForGood\bin\Microsoft.Web.Infrastructure.dll
-D:\GitHub\DonateForGood\DonateForGood\bin\Newtonsoft.Json.dll
-D:\GitHub\DonateForGood\DonateForGood\bin\Owin.dll
-D:\GitHub\DonateForGood\DonateForGood\bin\System.Web.Helpers.dll
-D:\GitHub\DonateForGood\DonateForGood\bin\System.Web.Mvc.dll
-D:\GitHub\DonateForGood\DonateForGood\bin\System.Web.Optimization.dll
-D:\GitHub\DonateForGood\DonateForGood\bin\System.Web.Razor.dll
-D:\GitHub\DonateForGood\DonateForGood\bin\System.Web.WebPages.Deployment.dll
-D:\GitHub\DonateForGood\DonateForGood\bin\System.Web.WebPages.dll
-D:\GitHub\DonateForGood\DonateForGood\bin\System.Web.WebPages.Razor.dll
-D:\GitHub\DonateForGood\DonateForGood\bin\WebGrease.dll
-D:\GitHub\DonateForGood\DonateForGood\bin\System.Web.Helpers.xml
-D:\GitHub\DonateForGood\DonateForGood\bin\System.Web.Mvc.xml
-D:\GitHub\DonateForGood\DonateForGood\bin\System.Web.Optimization.xml
-D:\GitHub\DonateForGood\DonateForGood\bin\System.Web.Razor.xml
-D:\GitHub\DonateForGood\DonateForGood\bin\System.Web.WebPages.xml
-D:\GitHub\DonateForGood\DonateForGood\bin\System.Web.WebPages.Deployment.xml
-D:\GitHub\DonateForGood\DonateForGood\bin\System.Web.WebPages.Razor.xml
-D:\GitHub\DonateForGood\DonateForGood\bin\Newtonsoft.Json.xml
-D:\GitHub\DonateForGood\DonateForGood\bin\Antlr3.Runtime.pdb
-D:\GitHub\DonateForGood\DonateForGood\bin\Microsoft.Owin.Host.SystemWeb.xml
-D:\GitHub\DonateForGood\DonateForGood\bin\Microsoft.Owin.Security.Facebook.xml
-D:\GitHub\DonateForGood\DonateForGood\bin\Microsoft.Owin.Security.Google.xml
-D:\GitHub\DonateForGood\DonateForGood\bin\Microsoft.Owin.Security.Twitter.xml
-D:\GitHub\DonateForGood\DonateForGood\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-D:\GitHub\DonateForGood\DonateForGood\obj\Debug\DonateForGood.csprojResolveAssemblyReference.cache
-D:\GitHub\DonateForGood\DonateForGood\obj\Debug\DonateForGood.dll
-D:\GitHub\DonateForGood\DonateForGood\obj\Debug\DonateForGood.pdb
+D:\DFG\Aapkivani\DFG Final\DonateForGoodFinal\DonateForGood\DonateForGood\bin\Images\ElectronicAppliance.jpg

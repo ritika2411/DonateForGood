@@ -14,48 +14,22 @@ namespace DonateForGood.Controllers
     public class ItemController : Controller
     {
         private DonateForGoodEntities db = new DonateForGoodEntities();
-        private byte[] imageData = null;
-
-
-
-        //public ActionResult Create1()
-        //{
-        //    return View();
-        //}
-
-        
+       
 
         [HttpPost]
-        public ActionResult UploadImage(HttpPostedFileBase file)
+        public void UploadImage(HttpPostedFileBase file)
         {
-            
-            if (file.ContentLength <= 0)
+            byte[] imageData = null;
+            if (file != null && file.ContentLength > 0)
             {
-                return RedirectToAction("Index", "Home");
-            }
-
-            if (file.ContentLength > 0)
-            {
-                
                 using (var binaryReader = new BinaryReader(file.InputStream))
                 {
                     imageData = binaryReader.ReadBytes(file.ContentLength);
                 }
             }
-
             Session["imageData"] = imageData;
             Session["imageFileName"] = file.FileName;
-
-            return RedirectToAction("Index","Home");
-
-
         }
-
-        public ActionResult UploadImage()
-        {
-            return View();
-        }
-
 
         // GET: /Item/
         public ActionResult Index(string searchString, string ItemCategoryId_, string LocationId_, string ItemStatusId)
@@ -63,7 +37,7 @@ namespace DonateForGood.Controllers
 
             int itemCategoryId = 0;
             int LocationId = 0;
-            int itemStatus = 0; 
+            int itemStatus = 0;
             ViewBag.ItemCategoryId_ = new SelectList(db.ItemCategories, "ItemCategoryId", "ItemCategoryName");
             ViewBag.LocationId_ = new SelectList(db.Locations, "LocationId", "LocationName");
             var itemposts = db.ItemPosts.Include(i => i.ItemCategory).Include(i => i.ItemCollectPreference).Include(i => i.Location).Include(i => i.ItemStatu).Include(i => i.User);
@@ -89,19 +63,19 @@ namespace DonateForGood.Controllers
             if (!String.IsNullOrEmpty(ItemStatusId))
             {
                 Int32.TryParse(ItemStatusId, out itemStatus);
-                itemposts = itemposts.Where(s => s.ItemStatusId==itemStatus);
-            }           
+                itemposts = itemposts.Where(s => s.ItemStatusId == itemStatus);
+            }
 
             return View(itemposts.ToList());
         }
-        
+
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TempData["Id"] = id; 
+            TempData["Id"] = id;
             ItemPost itempost = db.ItemPosts.Find(id);
             if (itempost == null)
             {
@@ -122,7 +96,7 @@ namespace DonateForGood.Controllers
         // GET: /Item/Create
         public ActionResult Create()
         {
-            ViewBag.ItemCategoryId_ = new SelectList(db.ItemCategories, "ItemCategoryId", "ItemCategoryName");      
+            ViewBag.ItemCategoryId_ = new SelectList(db.ItemCategories, "ItemCategoryId", "ItemCategoryName");
             ViewBag.ItemCollectPreferenceId = new SelectList(db.ItemCollectPreferences, "ItemCollectPreferenceId", "ItemCollectPreferenceName");
             ViewBag.LocationId_ = new SelectList(db.Locations, "LocationId", "LocationName");
             ViewBag.ItemStatusId = new SelectList(db.ItemStatus, "ItemStatusId", "ItemStatusName");
@@ -158,8 +132,10 @@ namespace DonateForGood.Controllers
             if (ModelState.IsValid)
             {
                 itempost.UserId = GetUserId(itempost);
-                //itempost.Photo1 = imageData;
-                itempost.Photo1 = Session["imageData"] as byte[];
+                if (Session["imageData"] != null)
+                {
+                    itempost.Photo1 = Session["imageData"] as byte[];
+                }
                 db.ItemPosts.Add(itempost);
                 db.SaveChanges();
                 Session["imageData"] = null;
@@ -173,10 +149,10 @@ namespace DonateForGood.Controllers
                 string EditURL = pageURL + "Edit/" + itempost.ItemPostId.ToString();
                 string DeleteURL = pageURL + "Delete/" + itempost.ItemPostId.ToString();
                 body = "Please click on these links if you want to <a href='" + EditURL + "'>EDIT</a>  OR <a href='" + DeleteURL + "'>DELETE</a> your item post from DonateForGood website";
-                              
+
                 if (SendMail(toAddress, subject, body) == "Successful")
                 {
-                    return RedirectToAction("Create","Item");
+                    return RedirectToAction("Create", "Item");
                 }
 
             }
@@ -184,7 +160,7 @@ namespace DonateForGood.Controllers
             ViewBag.ItemCollectPreferenceId = new SelectList(db.ItemCollectPreferences, "ItemCollectPreferenceId", "ItemCollectPreferenceName", itempost.ItemCollectPreferenceId);
             ViewBag.LocationId_ = new SelectList(db.Locations, "LocationId", "LocationName", itempost.LocationId_);
             ViewBag.ItemStatusId = new SelectList(db.ItemStatus, "ItemStatusId", "ItemStatusName", itempost.ItemStatusId);
-            
+
             return View(itempost);
         }
 
@@ -293,16 +269,19 @@ namespace DonateForGood.Controllers
         {
             int userId = 0;
             if (Session["LoggedInUserId"] != null)
-            { 
+            {
                 userId = int.Parse(Session["LoggedInUserId"].ToString());
             }
             if (userId == 0)
             {
+                string[] email = itempost.EmailAddress_.Split('@');
+                string username = email[0];
                 DonateForGood.Models.User user = new Models.User
                 {
                     UserTypeId = 2,
                     PhoneNumber = itempost.PhoneNumber,
-                    EmailAddress = itempost.EmailAddress_
+                    EmailAddress = itempost.EmailAddress_,
+                    UserName = username
                 };
                 var query = (from tableUser in db.Users
                              where (tableUser.PhoneNumber == user.PhoneNumber || tableUser.EmailAddress == user.EmailAddress)
@@ -322,11 +301,8 @@ namespace DonateForGood.Controllers
                               select tableUser.UserId).First();
                 }
             }
-            return userId;   
+            return userId;
         }
-       
-
-
 
         // GET: /Item/Edit/5
         public ActionResult Edit(int? id)
@@ -379,7 +355,7 @@ namespace DonateForGood.Controllers
                 {
                     return RedirectToAction("Index", "Home");
                 }
-                return RedirectToAction("Index","Home");
+                return RedirectToAction("Index", "Home");
             }
             ViewBag.ItemCategoryId_ = new SelectList(db.ItemCategories, "ItemCategoryId", "ItemCategoryName", itempost.ItemCategoryId_);
             ViewBag.ItemCollectPreferenceId = new SelectList(db.ItemCollectPreferences, "ItemCollectPreferenceId", "ItemCollectPreferenceName", itempost.ItemCollectPreferenceId);

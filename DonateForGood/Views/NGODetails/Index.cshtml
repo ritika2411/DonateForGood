@@ -3,66 +3,57 @@
 @{
     ViewBag.Title = "List of NGOs";
 }
-
-<h3>List of NGOs</h3>
-
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayName("Name of NGO")
-        </th>
-        <th>
-            @Html.DisplayName("Contact Number")
-        </th>
-        <th>
-            @Html.DisplayName("Email Address")
-        </th>
-        <th>
-            @Html.DisplayName("Website")
-        </th>
-        <th>
-            @Html.DisplayName("City")
-        </th>
-        <th>
-            @Html.DisplayName("")
-        </th>
-
-  </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PhoneNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EmailAddress)
-        </td>
-        <td>
-               
-          @{
-              
-        var link = @item.WebSiteURL;
-       if (link!=null && !link.StartsWith("http://")) link = "http://"+link; 
-       
-       }
-
-        <a href="@link">@item.WebSiteURL</a>
- 
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CityName)
-        </td>
+<div id="wrapper" class="row">
+    <div id="page-wrapper" class="col-md-12">
+        <div class="row page-header">
+            <div class="col-md-12">
+                <h3>List of NGOs</h3>
+            </div>            
+        </div>
         
-        
-        <td>
-            @*@Html.ActionLink("Edit", "Edit", new { id = item.User.UserId }) |*@
-            @Html.ActionLink("Details", "Details", new {  id=item.UserId  }) 
-            @*@Html.ActionLink("Delete", "Delete", new { id = item.User.UserId })*@
-        </td>
-    </tr>
-}
 
-</table>
+        @foreach (var item in Model)
+        {
+            <div class="row">
+                <div class="col-md-2">
+                    <div id="thumbnails">
+                        @if (item.Photo != null)
+                        {
+                            <img src="data:image;base64,@System.Convert.ToBase64String(item.Photo)" height="138" width="150" />
+                        }
+                        else
+                        {
+                            <img src="~/Images/NoImage.jpg" height="138" width="150" />
+                        }
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="panel panel-success">
+                        <div class="panel-heading">
+                            @{
+                                string NGOName = item.FirstName;
+                            }
+
+                            @Html.ActionLink(@NGOName, "Details", new { id = item.UserId })
+                        </div>
+                        <div class="panel-body">
+                            <div class="col-md-5">Phone: @Html.DisplayFor(modelItem => item.PhoneNumber)</div>
+                            <div class="col-md-5 col-md-push-1">Email:@Html.DisplayFor(modelItem => item.EmailAddress)</div>
+
+                        </div>
+                        <div class="panel-footer">
+                            <div class="col-md-5">City: @Html.DisplayFor(modelItem => item.CityName)</div>
+                            <div class="col-md-5 col-md-push-1">
+                                @{
+                                    var link = @item.WebSiteURL;
+                                    if (link != null && !link.StartsWith("http://")) link = "http://" + link;
+                                }
+                                Website:<a href="@link">@item.WebSiteURL</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

@@ -38,21 +38,26 @@
                 @Html.ActionLink("Back to Search", "Index", new { searchString = @searchString, ItemCategoryId_ = @ItemCategoryId, LocationId_ = @LocationId, Search = "Search" })
             </div>
         </div>
-        @{
-            if (Model.Photo1 != null)
-            {
-                <div class="row">
-                    <div class="col-md-12">
-                        <div id="thumbnails">
-                            <img src="data:image;base64,@System.Convert.ToBase64String(Model.Photo1)" height="150" width="150" onmouseover="showDivImageDisplay(this);" onmouseout="hideDivImageDisplay();" />
-                        </div>
-                    </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div id="thumbnails">
+                    @if (Model.Photo1 != null)
+                    {
+                        <img src="data:image;base64,@System.Convert.ToBase64String(Model.Photo1)" height="150" width="150" onmouseover="showDivImageDisplay(this);" onmouseout="hideDivImageDisplay();" />
+                    }
+                    else
+                    {
+                        <img src="~/Images/NoImage.jpg" height="150" width="150" />
+                    }
                 </div>
-                <span id="coord"></span>
-                <div id="divImageDisplay" style="position:absolute;z-index:2;">
-                </div>
-            }
-        }
+            </div>
+        </div>
+        <span id="coord"></span>
+        <div id="divImageDisplay" style="position:absolute;z-index:2;">
+        </div>
+        <br />
+
+        
         <div class="row">
             <div class="col-md-8">
                 <div class="panel panel-default">
@@ -153,6 +158,6 @@
                     </div>
                 </div>
             }
-        </div>       
+        </div>
     </div>
 </div>

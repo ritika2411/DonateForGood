@@ -274,11 +274,14 @@
     <Content Include="Content\Site.css" />
     <Content Include="Images\Books.jpg" />
     <Content Include="Images\Clothes.jpg" />
-    <Content Include="Images\ElectronicAppliance.jpg" />
+    <Content Include="Images\ElectronicAppliance.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\FoodItem.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Furniture.jpg" />
+    <Content Include="Images\NoImage.jpg" />
     <Content Include="Images\Other.jpg" />
     <Content Include="Images\spinner.gif" />
     <Content Include="Images\Stationary.jpg">
